@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { ScrollView, Text, View, TouchableOpacity, TextInput, Alert, Linking } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, TextInput, Alert } from "react-native";
 import { ScreenContainer } from "@/components/screen-container";
 import { useColors } from "@/hooks/use-colors";
 import { useProjects } from "@/lib/projects-context";
+import { Model3DViewer } from "@/components/model-viewer-3d";
 import * as Haptics from "expo-haptics";
 
 export default function ProjectsScreen() {
@@ -13,10 +14,9 @@ export default function ProjectsScreen() {
   const [description, setDescription] = useState("");
   const [sketchfabUrl, setSketchfabUrl] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [selectedModelId, setSelectedModelId] = useState<string | null>(null);
 
   const extractModelId = (url: string): string => {
-    // Extrai o ID do modelo da URL do Sketchfab
-    // Formato: https://sketchfab.com/models/MODEL_ID ou https://sketchfab.com/models/MODEL_ID/...
     const match = url.match(/\/models\/([a-zA-Z0-9]+)/);
     return match ? match[1] : "";
   };
@@ -74,11 +74,18 @@ export default function ProjectsScreen() {
     ]);
   };
 
-  const openSketchfab = (url: string) => {
-    Linking.openURL(url).catch(() => {
-      Alert.alert("Erro", "Não foi possível abrir o link");
-    });
+  const openViewer = (modelId: string) => {
+    setSelectedModelId(modelId);
   };
+
+  if (selectedModelId) {
+    return (
+      <Model3DViewer
+        modelId={selectedModelId}
+        onClose={() => setSelectedModelId(null)}
+      />
+    );
+  }
 
   const favorites = projects.filter((p) => p.isFavorite);
   const others = projects.filter((p) => !p.isFavorite);
@@ -185,7 +192,7 @@ export default function ProjectsScreen() {
 
                   <View className="flex-row gap-2">
                     <TouchableOpacity
-                      onPress={() => openSketchfab(project.sketchfabUrl)}
+                      onPress={() => openViewer(project.modelId)}
                       className="flex-1 p-2 rounded-lg"
                       style={{ backgroundColor: colors.primary }}
                     >
@@ -233,7 +240,7 @@ export default function ProjectsScreen() {
 
                   <View className="flex-row gap-2">
                     <TouchableOpacity
-                      onPress={() => openSketchfab(project.sketchfabUrl)}
+                      onPress={() => openViewer(project.modelId)}
                       className="flex-1 p-2 rounded-lg"
                       style={{ backgroundColor: colors.primary }}
                     >
@@ -272,7 +279,7 @@ export default function ProjectsScreen() {
               1. Encontre um modelo 3D no Sketchfab{"\n"}
               2. Copie a URL do modelo{"\n"}
               3. Cole aqui e clique em "Adicionar Projeto"{"\n"}
-              4. Clique em "Ver Modelo 3D" para visualizar
+              4. Clique em "Ver Modelo 3D" para visualizar com rotação e zoom
             </Text>
           </View>
         </View>

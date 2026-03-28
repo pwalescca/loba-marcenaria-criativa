@@ -99,3 +99,11 @@
 ## Remoções Finais
 
 - [x] Remover aba Home
+
+## Visualizador 3D Integrado
+
+- [x] Implementar visualizador 3D dentro do app
+- [x] Adicionar rotação 360° (via gesto de arraste)
+- [x] Adicionar zoom (botões +/-)
+- [x] Integrar com modelos do Sketchfab
+- [x] Adicionar controles de reset
