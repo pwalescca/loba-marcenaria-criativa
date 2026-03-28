@@ -43,3 +43,9 @@
 ## Bugs Encontrados
 
 - [x] Remover rotas internas do catálogo da barra de abas (catalog/index, catalog-detail, catalog/detail aparecem como abas)
+
+## Alterações Solicitadas
+
+- [x] Corrigir abas duplicadas de catálogo
+- [x] Renomear "Catálogo" para "Produtos"
+- [x] Adicionar logo como marca d'água nas páginas

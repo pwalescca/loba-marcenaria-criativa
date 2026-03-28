@@ -7,8 +7,18 @@ export default function InventoryLayout() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="detail" />
+      <Stack.Screen 
+        name="index" 
+        options={{
+          title: "Estoque",
+        }}
+      />
+      <Stack.Screen 
+        name="detail"
+        options={{
+          title: "Detalhes da Peça",
+        }}
+      />
     </Stack>
   );
 }

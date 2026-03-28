@@ -1,4 +1,4 @@
-import { View, type ViewProps } from "react-native";
+import { View, type ViewProps, Image } from "react-native";
 import { SafeAreaView, type Edge } from "react-native-safe-area-context";
 
 import { cn } from "@/lib/utils";
@@ -56,6 +56,19 @@ export function ScreenContainer({
       )}
       {...props}
     >
+      {/* Watermark - Logo as background */}
+      <Image
+        source={require("@/assets/images/icon.png")}
+        style={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          width: 200,
+          height: 200,
+          opacity: 0.08,
+        }}
+        resizeMode="contain"
+      />
       <SafeAreaView
         edges={edges}
         className={cn("flex-1", safeAreaClassName)}

@@ -7,8 +7,18 @@ export default function CatalogLayout() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="detail" />
+      <Stack.Screen 
+        name="index" 
+        options={{
+          title: "Produtos",
+        }}
+      />
+      <Stack.Screen 
+        name="detail"
+        options={{
+          title: "Detalhes do Produto",
+        }}
+      />
     </Stack>
   );
 }
