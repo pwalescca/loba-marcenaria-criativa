@@ -95,3 +95,7 @@
 - [x] Permitir busca de modelos 3D
 - [x] Visualizar modelos 3D dentro do app
 - [x] Salvar modelos favoritos
+
+## Remoções Finais
+
+- [x] Remover aba Home
