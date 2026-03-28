@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { ScrollView, Text, View, TouchableOpacity, Switch, Alert } from "react-native";
 import { ScreenContainer } from "@/components/screen-container";
 import { useColors } from "@/hooks/use-colors";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useThemeContext } from "@/lib/theme-provider";
 import * as Haptics from "expo-haptics";
 
 export default function SettingsScreen() {
   const colors = useColors();
-  const colorScheme = useColorScheme();
-  const [isDarkMode, setIsDarkMode] = useState(colorScheme === "dark");
+  const { colorScheme, setColorScheme } = useThemeContext();
+  const isDarkMode = colorScheme === "dark";
 
   const handleThemeToggle = (value: boolean) => {
-    setIsDarkMode(value);
+    const newScheme = value ? "dark" : "light";
+    setColorScheme(newScheme);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    // In a real app, you would save this preference to AsyncStorage
-    // and update the theme provider
   };
 
   const handleAbout = () => {
@@ -43,7 +42,9 @@ export default function SettingsScreen() {
             >
               <View className="flex-1">
                 <Text className="text-base font-semibold text-foreground">Modo Escuro</Text>
-                <Text className="text-sm text-muted mt-1">Ativar tema escuro</Text>
+                <Text className="text-sm text-muted mt-1">
+                  {isDarkMode ? "Ativado" : "Desativado"}
+                </Text>
               </View>
               <Switch
                 value={isDarkMode}
@@ -51,6 +52,16 @@ export default function SettingsScreen() {
                 trackColor={{ false: colors.border, true: colors.primary }}
                 thumbColor={isDarkMode ? colors.primary : colors.muted}
               />
+            </View>
+
+            {/* Theme Info */}
+            <View
+              className="p-3 rounded-lg"
+              style={{ backgroundColor: colors.surface }}
+            >
+              <Text className="text-xs text-muted text-center">
+                Tema atual: {isDarkMode ? "Escuro" : "Claro"}
+              </Text>
             </View>
           </View>
 

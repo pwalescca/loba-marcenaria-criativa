@@ -55,3 +55,10 @@
 - [x] Aumentar tamanho da marca d'água e centralizar no meio da página
 - [x] Criar aba de Configurações com tema claro/escuro
 - [x] Criar aba Sobre com data de criação, versão e criador
+
+## Implementação de Tema Claro/Escuro
+
+- [x] Criar contexto de tema persistente
+- [x] Implementar toggle de tema na aba Configurações
+- [x] Salvar preferência de tema no AsyncStorage
+- [x] Aplicar tema em todo o app
