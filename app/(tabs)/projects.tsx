@@ -126,23 +126,23 @@ export default function ProjectsScreen() {
           {/* Quick View Section */}
           <View className="gap-3 p-4 rounded-lg" style={{ backgroundColor: colors.surface }}>
             <Text className="text-lg font-bold text-foreground">🚀 Visualização Rápida</Text>
-            <Text className="text-xs text-muted">Cole um link do Sketchfab para visualizar instantaneamente</Text>
+            <Text className="text-xs text-muted">Cole o link do navegador do Sketchfab aqui</Text>
             
-            <View className="flex-row gap-2">
+            <View className="gap-2">
               <TextInput
-                placeholder="https://sketchfab.com/models/..."
+                placeholder="Cole o link do navegador (ex: https://sketchfab.com/models/abc123...)"
                 value={quickViewUrl}
                 onChangeText={setQuickViewUrl}
-                className="flex-1 border rounded-lg p-3"
+                className="border rounded-lg p-3"
                 style={{ borderColor: colors.border, color: colors.foreground }}
                 placeholderTextColor={colors.muted}
               />
               <TouchableOpacity
                 onPress={handleQuickView}
-                className="px-4 py-3 rounded-lg"
+                className="p-3 rounded-lg"
                 style={{ backgroundColor: colors.primary }}
               >
-                <Text className="text-white font-bold">→</Text>
+                <Text className="text-white font-bold text-center">Ver Modelo 3D</Text>
               </TouchableOpacity>
             </View>
           </View>

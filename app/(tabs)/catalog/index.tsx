@@ -100,7 +100,10 @@ export default function CatalogScreen() {
       <View className="flex-1 gap-4">
         {/* Header */}
         <View className="flex-row items-center justify-between">
-          <Text className="text-2xl font-bold text-primary">Catálogo</Text>
+          <View>
+            <Text className="text-2xl font-bold text-primary">Seja bem vinda Paulla</Text>
+            <Text className="text-sm text-muted mt-1">Vamos produzir?</Text>
+          </View>
           <TouchableOpacity
             onPress={handleAddProduct}
             activeOpacity={0.7}
