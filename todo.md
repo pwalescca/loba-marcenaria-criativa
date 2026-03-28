@@ -107,3 +107,9 @@
 - [x] Adicionar zoom (botões +/-)
 - [x] Integrar com modelos do Sketchfab
 - [x] Adicionar controles de reset
+
+## Visualização Rápida de Projetos 3D
+
+- [x] Criar campo de entrada de link do Sketchfab
+- [x] Visualizar modelo 3D diretamente sem salvar
+- [x] Integrar com visualizador 3D existente

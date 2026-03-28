@@ -15,6 +15,7 @@ export default function ProjectsScreen() {
   const [sketchfabUrl, setSketchfabUrl] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [selectedModelId, setSelectedModelId] = useState<string | null>(null);
+  const [quickViewUrl, setQuickViewUrl] = useState("");
 
   const extractModelId = (url: string): string => {
     const match = url.match(/\/models\/([a-zA-Z0-9]+)/);
@@ -61,6 +62,22 @@ export default function ProjectsScreen() {
     }
   };
 
+  const handleQuickView = () => {
+    if (!quickViewUrl.trim()) {
+      Alert.alert("Erro", "Cole uma URL do Sketchfab");
+      return;
+    }
+
+    const modelId = extractModelId(quickViewUrl);
+    if (!modelId) {
+      Alert.alert("Erro", "URL do Sketchfab inválida. Use: https://sketchfab.com/models/MODEL_ID");
+      return;
+    }
+
+    setSelectedModelId(modelId);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
+
   const handleDelete = (id: string) => {
     Alert.alert("Confirmar", "Deseja remover este projeto?", [
       { text: "Cancelar" },
@@ -104,6 +121,30 @@ export default function ProjectsScreen() {
             >
               <Text className="text-white font-semibold">{showForm ? "Cancelar" : "Novo"}</Text>
             </TouchableOpacity>
+          </View>
+
+          {/* Quick View Section */}
+          <View className="gap-3 p-4 rounded-lg" style={{ backgroundColor: colors.surface }}>
+            <Text className="text-lg font-bold text-foreground">🚀 Visualização Rápida</Text>
+            <Text className="text-xs text-muted">Cole um link do Sketchfab para visualizar instantaneamente</Text>
+            
+            <View className="flex-row gap-2">
+              <TextInput
+                placeholder="https://sketchfab.com/models/..."
+                value={quickViewUrl}
+                onChangeText={setQuickViewUrl}
+                className="flex-1 border rounded-lg p-3"
+                style={{ borderColor: colors.border, color: colors.foreground }}
+                placeholderTextColor={colors.muted}
+              />
+              <TouchableOpacity
+                onPress={handleQuickView}
+                className="px-4 py-3 rounded-lg"
+                style={{ backgroundColor: colors.primary }}
+              >
+                <Text className="text-white font-bold">→</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           {/* Form */}
@@ -265,21 +306,20 @@ export default function ProjectsScreen() {
           {projects.length === 0 && !showForm && (
             <View className="items-center justify-center py-12 gap-4">
               <Text className="text-4xl">📐</Text>
-              <Text className="text-lg font-semibold text-foreground">Nenhum Projeto</Text>
+              <Text className="text-lg font-semibold text-foreground">Nenhum Projeto Salvo</Text>
               <Text className="text-sm text-muted text-center">
-                Adicione modelos 3D do Sketchfab para visualizar seus projetos
+                Use a visualização rápida ou adicione modelos 3D do Sketchfab para salvar
               </Text>
             </View>
           )}
 
           {/* Info Box */}
           <View className="p-4 rounded-lg" style={{ backgroundColor: colors.surface }}>
-            <Text className="text-sm font-semibold text-foreground mb-2">Como Usar:</Text>
+            <Text className="text-sm font-semibold text-foreground mb-2">Dicas:</Text>
             <Text className="text-xs text-muted leading-relaxed">
-              1. Encontre um modelo 3D no Sketchfab{"\n"}
-              2. Copie a URL do modelo{"\n"}
-              3. Cole aqui e clique em "Adicionar Projeto"{"\n"}
-              4. Clique em "Ver Modelo 3D" para visualizar com rotação e zoom
+              💡 Use a "Visualização Rápida" para ver qualquer modelo sem salvar{"\n"}
+              💾 Clique em "Novo" para salvar seus projetos favoritos{"\n"}
+              ⭐ Marque como favorito para acesso rápido
             </Text>
           </View>
         </View>
