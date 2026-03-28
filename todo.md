@@ -125,3 +125,8 @@
 - [x] Remover aba Índex (Catálogo)
 - [x] Restaurar aba Home
 - [x] Centralizar mensagem de boas-vindas na Home
+
+## Novas Correções
+
+- [x] Remover aba Projects do menu
+- [x] Corrigir localização do Explorer para Goiânia, Goiás
