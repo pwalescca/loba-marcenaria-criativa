@@ -83,3 +83,7 @@
 - [x] Aumentar tamanho das letras dos itens
 - [x] Adicionar informações sobre cortes para cada madeira
 - [x] Integrar fotos de cada tipo de madeira
+
+## Ajustes Finais
+
+- [x] Remover opção de tema claro/escuro das Configurações

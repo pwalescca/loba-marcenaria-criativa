@@ -1,20 +1,11 @@
 import React from "react";
-import { ScrollView, Text, View, TouchableOpacity, Switch, Alert } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, Alert } from "react-native";
 import { ScreenContainer } from "@/components/screen-container";
 import { useColors } from "@/hooks/use-colors";
-import { useThemeContext } from "@/lib/theme-provider";
 import * as Haptics from "expo-haptics";
 
 export default function SettingsScreen() {
   const colors = useColors();
-  const { colorScheme, setColorScheme } = useThemeContext();
-  const isDarkMode = colorScheme === "dark";
-
-  const handleThemeToggle = (value: boolean) => {
-    const newScheme = value ? "dark" : "light";
-    setColorScheme(newScheme);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-  };
 
   const handleAbout = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -31,39 +22,6 @@ export default function SettingsScreen() {
         <View className="gap-6">
           {/* Header */}
           <Text className="text-2xl font-bold text-primary">Configurações</Text>
-
-          {/* Theme Section */}
-          <View className="gap-4">
-            <Text className="text-lg font-bold text-foreground">Aparência</Text>
-
-            <View
-              className="flex-row items-center justify-between p-4 rounded-lg"
-              style={{ backgroundColor: colors.surface }}
-            >
-              <View className="flex-1">
-                <Text className="text-base font-semibold text-foreground">Modo Escuro</Text>
-                <Text className="text-sm text-muted mt-1">
-                  {isDarkMode ? "Ativado" : "Desativado"}
-                </Text>
-              </View>
-              <Switch
-                value={isDarkMode}
-                onValueChange={handleThemeToggle}
-                trackColor={{ false: colors.border, true: colors.primary }}
-                thumbColor={isDarkMode ? colors.primary : colors.muted}
-              />
-            </View>
-
-            {/* Theme Info */}
-            <View
-              className="p-3 rounded-lg"
-              style={{ backgroundColor: colors.surface }}
-            >
-              <Text className="text-xs text-muted text-center">
-                Tema atual: {isDarkMode ? "Escuro" : "Claro"}
-              </Text>
-            </View>
-          </View>
 
           {/* About Section */}
           <View className="gap-4">
@@ -116,7 +74,7 @@ export default function SettingsScreen() {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                 Alert.alert(
                   "Como Usar",
-                  "Produtos: Adicione e gerencie seus produtos com fotos e medidas.\n\nEstoque: Controle suas peças com informações de madeira e quantidade.\n\nExplorer: Busque fornecedores de paletes próximos com preços.",
+                  "Produtos: Adicione e gerencie seus produtos com fotos e medidas.\n\nEstoque: Controle suas peças com informações de madeira e quantidade.\n\nExplorer: Busque fornecedores de paletes próximos com preços.\n\nBiblioteca: Conheça características, usos e cortes de diferentes madeiras.",
                   [{ text: "OK" }],
                 );
               }}
