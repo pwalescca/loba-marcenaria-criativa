@@ -30,11 +30,6 @@ export default function CatalogDetailScreen() {
       return;
     }
 
-    if (photos.length === 0) {
-      Alert.alert("Erro", "Adicione pelo menos uma foto");
-      return;
-    }
-
     setIsSaving(true);
     try {
       const productData = {

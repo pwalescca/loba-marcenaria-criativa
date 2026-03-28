@@ -8,6 +8,7 @@ import { useColors } from "@/hooks/use-colors";
 import * as Haptics from "expo-haptics";
 
 const WOOD_TYPES = [
+  "Pinus",
   "Pinho",
   "Eucalipto",
   "Cedro",
@@ -46,11 +47,6 @@ export default function InventoryDetailScreen() {
 
     if (!woodType) {
       Alert.alert("Erro", "Tipo de madeira é obrigatório");
-      return;
-    }
-
-    if (photos.length === 0) {
-      Alert.alert("Erro", "Adicione pelo menos uma foto");
       return;
     }
 

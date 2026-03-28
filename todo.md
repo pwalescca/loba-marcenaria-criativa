@@ -62,3 +62,9 @@
 - [x] Implementar toggle de tema na aba Configurações
 - [x] Salvar preferência de tema no AsyncStorage
 - [x] Aplicar tema em todo o app
+
+## Ajustes de Validação e Tipos
+
+- [x] Remover obrigatoriedade de foto no Catálogo
+- [x] Remover obrigatoriedade de foto no Estoque
+- [x] Adicionar Pinus aos tipos de madeira
