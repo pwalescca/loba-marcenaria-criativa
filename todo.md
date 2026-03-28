@@ -49,3 +49,9 @@
 - [x] Corrigir abas duplicadas de catálogo
 - [x] Renomear "Catálogo" para "Produtos"
 - [x] Adicionar logo como marca d'água nas páginas
+
+## Novas Alterações Solicitadas
+
+- [x] Aumentar tamanho da marca d'água e centralizar no meio da página
+- [x] Criar aba de Configurações com tema claro/escuro
+- [x] Criar aba Sobre com data de criação, versão e criador

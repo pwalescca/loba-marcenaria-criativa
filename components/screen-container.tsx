@@ -56,23 +56,34 @@ export function ScreenContainer({
       )}
       {...props}
     >
-      {/* Watermark - Logo as background */}
-      <Image
-        source={require("@/assets/images/icon.png")}
+      {/* Watermark - Logo as background centered */}
+      <View
         style={{
           position: "absolute",
-          bottom: 0,
+          top: 0,
+          left: 0,
           right: 0,
-          width: 200,
-          height: 200,
-          opacity: 0.08,
+          bottom: 0,
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 0,
         }}
-        resizeMode="contain"
-      />
+        pointerEvents="none"
+      >
+        <Image
+          source={require("@/assets/images/icon.png")}
+          style={{
+            width: 350,
+            height: 350,
+            opacity: 0.12,
+          }}
+          resizeMode="contain"
+        />
+      </View>
       <SafeAreaView
         edges={edges}
         className={cn("flex-1", safeAreaClassName)}
-        style={style}
+        style={[style, { zIndex: 1 }]}
       >
         <View className={cn("flex-1", className)}>{children}</View>
       </SafeAreaView>
