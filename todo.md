@@ -118,3 +118,10 @@
 
 - [x] Corrigir visualização rápida para funcionar apenas com link do navegador
 - [x] Atualizar mensagem de boas-vindas na página de abertura
+
+## Reorganização de Abas
+
+- [x] Remover aba Projetos
+- [x] Remover aba Índex (Catálogo)
+- [x] Restaurar aba Home
+- [x] Centralizar mensagem de boas-vindas na Home
