@@ -68,3 +68,12 @@
 - [x] Remover obrigatoriedade de foto no Catálogo
 - [x] Remover obrigatoriedade de foto no Estoque
 - [x] Adicionar Pinus aos tipos de madeira
+
+## Biblioteca de Madeiras
+
+- [x] Criar aba Biblioteca no menu
+- [x] Adicionar informações sobre Pinus
+- [x] Adicionar informações sobre Eucalipto
+- [x] Adicionar informações sobre Madeira de Lei
+- [x] Adicionar informações sobre OSB
+- [x] Buscar e adicionar fotos de cada madeira
