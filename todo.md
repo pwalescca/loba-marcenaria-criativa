@@ -87,3 +87,11 @@
 ## Ajustes Finais
 
 - [x] Remover opção de tema claro/escuro das Configurações
+
+## Aba Projetos com Modelagem 3D
+
+- [x] Criar aba Projetos no menu
+- [x] Integrar com Sketchfab para visualizar modelos 3D
+- [x] Permitir busca de modelos 3D
+- [x] Visualizar modelos 3D dentro do app
+- [x] Salvar modelos favoritos
