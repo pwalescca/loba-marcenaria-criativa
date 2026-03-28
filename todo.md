@@ -77,3 +77,9 @@
 - [x] Adicionar informações sobre Madeira de Lei
 - [x] Adicionar informações sobre OSB
 - [x] Buscar e adicionar fotos de cada madeira
+
+## Melhorias na Biblioteca
+
+- [x] Aumentar tamanho das letras dos itens
+- [x] Adicionar informações sobre cortes para cada madeira
+- [x] Integrar fotos de cada tipo de madeira

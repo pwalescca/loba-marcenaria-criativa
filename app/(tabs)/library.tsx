@@ -10,8 +10,10 @@ interface WoodInfo {
   description: string;
   characteristics: string[];
   uses: string[];
+  cuts: string[];
   curiosities: string[];
   color: string;
+  image: any;
 }
 
 const WOODS: WoodInfo[] = [
@@ -35,6 +37,13 @@ const WOODS: WoodInfo[] = [
       "Construção civil",
       "Embalagens",
     ],
+    cuts: [
+      "Corte reto: Ideal para móveis e estruturas",
+      "Corte em ângulo: Perfeito para detalhes decorativos",
+      "Corte transversal: Facilita o acabamento",
+      "Corte longitudinal: Excelente para peças longas",
+      "Corte em bisel: Ótimo para acabamentos refinados",
+    ],
     curiosities: [
       "O Pinheiro Bristlecone é uma das árvores mais antigas do mundo, com exemplares que ultrapassam 5.000 anos",
       "Cresce rapidamente sem necessidade de solo rico em nutrientes",
@@ -42,6 +51,7 @@ const WOODS: WoodInfo[] = [
       "Muito usada em marcenaria e carpintaria exterior",
     ],
     color: "#D4A574",
+    image: require("@/assets/images/wood-pinus.jpg"),
   },
   {
     id: "eucalipto",
@@ -63,6 +73,13 @@ const WOODS: WoodInfo[] = [
       "Construção naval",
       "Pisos",
     ],
+    cuts: [
+      "Corte reto: Para estruturas e postes",
+      "Corte em ângulo: Requer ferramentas afiadas",
+      "Corte transversal: Cuidado com lascas",
+      "Corte em cunha: Para peças de encaixe",
+      "Corte em meia-lua: Para acabamentos curvos",
+    ],
     curiosities: [
       "Pode alcançar mais de 60 metros de altura",
       "Brota novamente após o corte",
@@ -71,6 +88,7 @@ const WOODS: WoodInfo[] = [
       "Usado há séculos pelos aborígenes australianos",
     ],
     color: "#8B6F47",
+    image: require("@/assets/images/wood-eucalipto.jpg"),
   },
   {
     id: "lei",
@@ -92,6 +110,13 @@ const WOODS: WoodInfo[] = [
       "Instrumentos musicais",
       "Objetos de arte",
     ],
+    cuts: [
+      "Corte reto: Para peças estruturais finas",
+      "Corte em ângulo: Excelente para detalhes",
+      "Corte transversal: Requer serra de precisão",
+      "Corte em arco: Para peças decorativas",
+      "Corte em espinha: Para encaixes especiais",
+    ],
     curiosities: [
       "Cresce lentamente, levando décadas para atingir tamanho comercial",
       "Altamente resistente a insetos, fungos e intempéries",
@@ -100,6 +125,7 @@ const WOODS: WoodInfo[] = [
       "Exploração controlada por leis ambientais",
     ],
     color: "#654321",
+    image: require("@/assets/images/wood-lei.jpg"),
   },
   {
     id: "osb",
@@ -121,6 +147,13 @@ const WOODS: WoodInfo[] = [
       "Armários",
       "Embalagens",
     ],
+    cuts: [
+      "Corte reto: Ideal para painéis de parede",
+      "Corte em ângulo: Para encaixes de estrutura",
+      "Corte em L: Perfeito para cantos e bordas",
+      "Corte em T: Para junções de painéis",
+      "Corte em U: Para passagem de tubulações",
+    ],
     curiosities: [
       "Utiliza 90% do tronco da madeira",
       "Feito a partir de madeira de reflorestamento",
@@ -130,6 +163,7 @@ const WOODS: WoodInfo[] = [
       "Pode ser pregado, parafusado e grampeado",
     ],
     color: "#A0826D",
+    image: require("@/assets/images/wood-osb.jpg"),
   },
 ];
 
@@ -147,9 +181,9 @@ export default function LibraryScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
         <View className="gap-6">
           {/* Header */}
-          <Text className="text-2xl font-bold text-primary">Biblioteca de Madeiras</Text>
-          <Text className="text-sm text-muted">
-            Conheça as características, usos e curiosidades sobre os principais tipos de madeira
+          <Text className="text-3xl font-bold text-primary">Biblioteca de Madeiras</Text>
+          <Text className="text-base text-muted">
+            Conheça as características, usos, cortes e curiosidades sobre os principais tipos de madeira
           </Text>
 
           {/* Wood Cards */}
@@ -167,25 +201,36 @@ export default function LibraryScreen() {
                 style={{ backgroundColor: wood.color }}
               >
                 <View className="flex-1">
-                  <Text className="text-lg font-bold text-white">{wood.name}</Text>
+                  <Text className="text-2xl font-bold text-white">{wood.name}</Text>
                 </View>
-                <Text className="text-2xl text-white">{expandedId === wood.id ? "−" : "+"}</Text>
+                <Text className="text-3xl text-white">{expandedId === wood.id ? "−" : "+"}</Text>
               </View>
 
               {/* Content */}
               {expandedId === wood.id && (
                 <View className="p-4 gap-4">
+                  {/* Image */}
+                  <Image
+                    source={wood.image}
+                    style={{
+                      width: "100%",
+                      height: 200,
+                      borderRadius: 8,
+                    }}
+                    resizeMode="cover"
+                  />
+
                   {/* Description */}
                   <View>
-                    <Text className="text-sm font-semibold text-foreground mb-2">Descrição</Text>
-                    <Text className="text-xs text-muted leading-relaxed">{wood.description}</Text>
+                    <Text className="text-lg font-semibold text-foreground mb-2">Descrição</Text>
+                    <Text className="text-base text-muted leading-relaxed">{wood.description}</Text>
                   </View>
 
                   {/* Characteristics */}
                   <View>
-                    <Text className="text-sm font-semibold text-foreground mb-2">Características</Text>
+                    <Text className="text-lg font-semibold text-foreground mb-2">Características</Text>
                     {wood.characteristics.map((char, idx) => (
-                      <Text key={idx} className="text-xs text-muted mb-1">
+                      <Text key={idx} className="text-base text-muted mb-2">
                         • {char}
                       </Text>
                     ))}
@@ -193,19 +238,29 @@ export default function LibraryScreen() {
 
                   {/* Uses */}
                   <View>
-                    <Text className="text-sm font-semibold text-foreground mb-2">Principais Usos</Text>
+                    <Text className="text-lg font-semibold text-foreground mb-2">Principais Usos</Text>
                     {wood.uses.map((use, idx) => (
-                      <Text key={idx} className="text-xs text-muted mb-1">
+                      <Text key={idx} className="text-base text-muted mb-2">
                         • {use}
+                      </Text>
+                    ))}
+                  </View>
+
+                  {/* Cuts */}
+                  <View>
+                    <Text className="text-lg font-semibold text-foreground mb-2">Tipos de Corte</Text>
+                    {wood.cuts.map((cut, idx) => (
+                      <Text key={idx} className="text-base text-muted mb-2">
+                        ✂️ {cut}
                       </Text>
                     ))}
                   </View>
 
                   {/* Curiosities */}
                   <View>
-                    <Text className="text-sm font-semibold text-foreground mb-2">Curiosidades</Text>
+                    <Text className="text-lg font-semibold text-foreground mb-2">Curiosidades</Text>
                     {wood.curiosities.map((curiosity, idx) => (
-                      <Text key={idx} className="text-xs text-muted mb-1">
+                      <Text key={idx} className="text-base text-muted mb-2">
                         💡 {curiosity}
                       </Text>
                     ))}
@@ -220,8 +275,8 @@ export default function LibraryScreen() {
             className="p-4 rounded-lg"
             style={{ backgroundColor: colors.surface }}
           >
-            <Text className="text-xs text-muted text-center">
-              Toque em cada madeira para ver mais detalhes, características, usos e curiosidades.
+            <Text className="text-base text-muted text-center">
+              Toque em cada madeira para ver detalhes completos, características, usos, tipos de corte e curiosidades.
             </Text>
           </View>
         </View>
