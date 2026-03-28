@@ -39,3 +39,7 @@
 - [ ] Relatórios de vendas
 - [ ] Integração com WhatsApp para contato com clientes
 - [ ] Histórico de transações
+
+## Bugs Encontrados
+
+- [x] Remover rotas internas do catálogo da barra de abas (catalog/index, catalog-detail, catalog/detail aparecem como abas)
