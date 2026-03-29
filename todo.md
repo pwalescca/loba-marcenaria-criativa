@@ -130,3 +130,8 @@
 
 - [x] Remover aba Projects do menu
 - [x] Corrigir localização do Explorer para Goiânia, Goiás
+
+## Bug: Abas Duplicadas
+
+- [x] Remover aba "index" da barra de navegação
+- [x] Remover aba "projects" da barra de navegação
