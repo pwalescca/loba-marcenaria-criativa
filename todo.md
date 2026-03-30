@@ -135,3 +135,10 @@
 
 - [x] Remover aba "index" da barra de navegação
 - [x] Remover aba "projects" da barra de navegação
+
+## Melhorias na Biblioteca - Design Imersivo
+
+- [x] Adicionar thumbnails das madeiras
+- [x] Melhorar layout com cards mais visuais
+- [x] Adicionar nomes das madeiras em destaque
+- [x] Criar interface mais imersiva

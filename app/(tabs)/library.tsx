@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { ScrollView, Text, View, TouchableOpacity, Image } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, Image, Dimensions } from "react-native";
 import { ScreenContainer } from "@/components/screen-container";
 import { useColors } from "@/hooks/use-colors";
 import * as Haptics from "expo-haptics";
+import { useState } from "react";
 
 interface WoodInfo {
   id: string;
@@ -99,70 +99,69 @@ const WOODS: WoodInfo[] = [
       "Cor: Varia conforme espécie (escura a clara)",
       "Densidade: Alta",
       "Dureza: Muito dura",
-      "Resistência: Muito alta",
-      "Durabilidade: Excepcional",
+      "Resistência: Excelente",
+      "Trabalhabilidade: Difícil",
     ],
     uses: [
       "Móveis de luxo",
-      "Construção naval",
-      "Portas e janelas",
-      "Escadas",
       "Instrumentos musicais",
-      "Objetos de arte",
+      "Acabamentos refinados",
+      "Estruturas permanentes",
+      "Arte e escultura",
+      "Construção naval",
     ],
     cuts: [
-      "Corte reto: Para peças estruturais finas",
-      "Corte em ângulo: Excelente para detalhes",
-      "Corte transversal: Requer serra de precisão",
-      "Corte em arco: Para peças decorativas",
-      "Corte em espinha: Para encaixes especiais",
+      "Corte reto: Para móveis de alta qualidade",
+      "Corte em ângulo: Requer precisão",
+      "Corte transversal: Excelente acabamento",
+      "Corte em espiral: Para peças artísticas",
+      "Corte em mosaico: Para trabalhos decorativos",
     ],
     curiosities: [
-      "Cresce lentamente, levando décadas para atingir tamanho comercial",
-      "Altamente resistente a insetos, fungos e intempéries",
-      "Algumas espécies podem durar séculos",
-      "Ipê, Cumaru e Angelim são exemplos de madeiras de lei",
-      "Exploração controlada por leis ambientais",
+      "Algumas espécies levam mais de 100 anos para crescer",
+      "Extremamente resistente ao tempo e umidade",
+      "Protegidas por leis ambientais internacionais",
+      "Algumas espécies são mais caras que ouro",
+      "Muito procuradas por colecionadores e artistas",
     ],
-    color: "#654321",
+    color: "#3D2817",
     image: require("@/assets/images/wood-lei.jpg"),
   },
   {
     id: "osb",
     name: "OSB",
     description:
-      "Oriented Strand Board (OSB) é um painel de madeira industrializado feito de camadas comprimidas de fibras de madeira unidas por adesivos sob calor e pressão.",
+      "Oriented Strand Board (OSB) é um painel industrializado feito de fitas de madeira prensadas com resina. Oferece excelente relação custo-benefício.",
     characteristics: [
       "Cor: Marrom claro",
       "Densidade: Média",
       "Dureza: Média",
       "Resistência: Boa",
-      "Uniformidade: Excelente",
+      "Trabalhabilidade: Excelente",
     ],
     uses: [
-      "Revestimento de telhados",
+      "Estruturas de telhado",
       "Revestimento de paredes",
-      "Pisos e subpisos",
-      "Móveis",
-      "Armários",
+      "Pisos",
       "Embalagens",
+      "Móveis econômicos",
+      "Construção civil",
     ],
     cuts: [
-      "Corte reto: Ideal para painéis de parede",
-      "Corte em ângulo: Para encaixes de estrutura",
-      "Corte em L: Perfeito para cantos e bordas",
-      "Corte em T: Para junções de painéis",
-      "Corte em U: Para passagem de tubulações",
+      "Corte reto: Perfeito para estruturas",
+      "Corte em ângulo: Fácil e preciso",
+      "Corte transversal: Sem dificuldades",
+      "Corte em L: Para encaixes estruturais",
+      "Corte em U: Para passagens e aberturas",
     ],
     curiosities: [
-      "Utiliza 90% do tronco da madeira",
-      "Feito a partir de madeira de reflorestamento",
-      "Sem nudos, facilitando mecanização",
-      "Excelente relação custo-benefício",
-      "Resistente a ruptura e torsão",
-      "Pode ser pregado, parafusado e grampeado",
+      "Inventado na década de 1970 na Europa",
+      "Feito a partir de resíduos de madeira",
+      "Mais sustentável que compensado",
+      "Excelente isolamento térmico",
+      "Muito utilizado na construção civil moderna",
     ],
-    color: "#A0826D",
+    color: "#A68B5B",
     image: require("@/assets/images/wood-osb.jpg"),
   },
 ];
@@ -170,116 +169,130 @@ const WOODS: WoodInfo[] = [
 export default function LibraryScreen() {
   const colors = useColors();
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const screenWidth = Dimensions.get("window").width;
 
   const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    setExpandedId(expandedId === id ? null : id);
   };
 
   return (
-    <ScreenContainer className="p-4">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
-        <View className="gap-6">
-          {/* Header */}
-          <Text className="text-3xl font-bold text-primary">Biblioteca de Madeiras</Text>
-          <Text className="text-base text-muted">
-            Conheça as características, usos, cortes e curiosidades sobre os principais tipos de madeira
+    <ScreenContainer className="p-0">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
+        {/* Header */}
+        <View className="bg-primary px-6 py-8 gap-2">
+          <Text className="text-4xl font-bold text-background">📚 Biblioteca</Text>
+          <Text className="text-base text-background opacity-90">
+            Conheça os tipos de madeira e suas características
           </Text>
+        </View>
 
-          {/* Wood Cards */}
+        {/* Wood Cards Grid */}
+        <View className="px-4 py-6 gap-4">
           {WOODS.map((wood) => (
             <TouchableOpacity
               key={wood.id}
               onPress={() => toggleExpand(wood.id)}
               activeOpacity={0.7}
-              className="rounded-lg overflow-hidden"
+              className="rounded-2xl overflow-hidden border border-border"
               style={{ backgroundColor: colors.surface }}
             >
-              {/* Header */}
-              <View
-                className="p-4 flex-row items-center justify-between"
-                style={{ backgroundColor: wood.color }}
-              >
-                <View className="flex-1">
-                  <Text className="text-2xl font-bold text-white">{wood.name}</Text>
+              {/* Card Header with Image and Name */}
+              <View className="relative">
+                <Image
+                  source={wood.image}
+                  style={{
+                    width: "100%",
+                    height: 180,
+                    resizeMode: "cover",
+                  }}
+                />
+                {/* Overlay with Wood Name */}
+                <View
+                  className="absolute inset-0 flex justify-end p-4"
+                  style={{
+                    backgroundColor: "rgba(0, 0, 0, 0.4)",
+                  }}
+                >
+                  <Text className="text-3xl font-bold text-yellow-400">
+                    {wood.name}
+                  </Text>
                 </View>
-                <Text className="text-3xl text-white">{expandedId === wood.id ? "−" : "+"}</Text>
               </View>
 
-              {/* Content */}
-              {expandedId === wood.id && (
-                <View className="p-4 gap-4">
-                  {/* Image */}
-                  <Image
-                    source={wood.image}
-                    style={{
-                      width: "100%",
-                      height: 200,
-                      borderRadius: 8,
-                    }}
-                    resizeMode="cover"
-                  />
+              {/* Card Content */}
+              <View className="p-4 gap-3">
+                {/* Description */}
+                <Text className="text-sm text-muted leading-relaxed">
+                  {wood.description}
+                </Text>
 
-                  {/* Description */}
-                  <View>
-                    <Text className="text-lg font-semibold text-foreground mb-2">Descrição</Text>
-                    <Text className="text-base text-muted leading-relaxed">{wood.description}</Text>
-                  </View>
-
-                  {/* Characteristics */}
-                  <View>
-                    <Text className="text-lg font-semibold text-foreground mb-2">Características</Text>
-                    {wood.characteristics.map((char, idx) => (
-                      <Text key={idx} className="text-base text-muted mb-2">
-                        • {char}
+                {/* Expanded Content */}
+                {expandedId === wood.id && (
+                  <View className="gap-4 mt-2 pt-4 border-t border-border">
+                    {/* Characteristics */}
+                    <View className="gap-2">
+                      <Text className="text-base font-semibold text-foreground">
+                        🔍 Características
                       </Text>
-                    ))}
-                  </View>
+                      {wood.characteristics.map((char, idx) => (
+                        <Text key={idx} className="text-sm text-muted ml-4">
+                          • {char}
+                        </Text>
+                      ))}
+                    </View>
 
-                  {/* Uses */}
-                  <View>
-                    <Text className="text-lg font-semibold text-foreground mb-2">Principais Usos</Text>
-                    {wood.uses.map((use, idx) => (
-                      <Text key={idx} className="text-base text-muted mb-2">
-                        • {use}
+                    {/* Uses */}
+                    <View className="gap-2">
+                      <Text className="text-base font-semibold text-foreground">
+                        🛠️ Usos Principais
                       </Text>
-                    ))}
-                  </View>
+                      {wood.uses.map((use, idx) => (
+                        <Text key={idx} className="text-sm text-muted ml-4">
+                          • {use}
+                        </Text>
+                      ))}
+                    </View>
 
-                  {/* Cuts */}
-                  <View>
-                    <Text className="text-lg font-semibold text-foreground mb-2">Tipos de Corte</Text>
-                    {wood.cuts.map((cut, idx) => (
-                      <Text key={idx} className="text-base text-muted mb-2">
-                        ✂️ {cut}
+                    {/* Cuts */}
+                    <View className="gap-2">
+                      <Text className="text-base font-semibold text-foreground">
+                        ✂️ Tipos de Corte
                       </Text>
-                    ))}
-                  </View>
+                      {wood.cuts.map((cut, idx) => (
+                        <Text key={idx} className="text-sm text-muted ml-4">
+                          • {cut}
+                        </Text>
+                      ))}
+                    </View>
 
-                  {/* Curiosities */}
-                  <View>
-                    <Text className="text-lg font-semibold text-foreground mb-2">Curiosidades</Text>
-                    {wood.curiosities.map((curiosity, idx) => (
-                      <Text key={idx} className="text-base text-muted mb-2">
-                        💡 {curiosity}
+                    {/* Curiosities */}
+                    <View className="gap-2">
+                      <Text className="text-base font-semibold text-foreground">
+                        ⭐ Curiosidades
                       </Text>
-                    ))}
+                      {wood.curiosities.map((curiosity, idx) => (
+                        <Text key={idx} className="text-sm text-muted ml-4">
+                          • {curiosity}
+                        </Text>
+                      ))}
+                    </View>
                   </View>
+                )}
+
+                {/* Expand/Collapse Indicator */}
+                <View className="flex-row justify-center pt-2">
+                  <Text className="text-primary font-semibold">
+                    {expandedId === wood.id ? "▼ Menos informações" : "▶ Mais informações"}
+                  </Text>
                 </View>
-              )}
+              </View>
             </TouchableOpacity>
           ))}
-
-          {/* Info Box */}
-          <View
-            className="p-4 rounded-lg"
-            style={{ backgroundColor: colors.surface }}
-          >
-            <Text className="text-base text-muted text-center">
-              Toque em cada madeira para ver detalhes completos, características, usos, tipos de corte e curiosidades.
-            </Text>
-          </View>
         </View>
+
+        {/* Footer Spacing */}
+        <View className="h-8" />
       </ScrollView>
     </ScreenContainer>
   );
