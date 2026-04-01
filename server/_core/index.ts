@@ -60,6 +60,24 @@ async function startServer() {
     res.json({ ok: true, timestamp: Date.now() });
   });
 
+  // Serve Expo app info
+  app.get("/", (_req, res) => {
+    res.json({
+      app: "Loba Marcenaria Criativa",
+      status: "running",
+      message: "App is running. Use Expo Go to connect.",
+      timestamp: Date.now(),
+    });
+  });
+
+  app.get("/status", (_req, res) => {
+    res.json({
+      status: "ok",
+      app: "loba-marcenaria-criativa",
+      version: "1.0.0",
+    });
+  });
+
   app.use(
     "/api/trpc",
     createExpressMiddleware({
@@ -75,8 +93,9 @@ async function startServer() {
     console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
   }
 
-  server.listen(port, () => {
+  server.listen(port, "0.0.0.0", () => {
     console.log(`[api] server listening on port ${port}`);
+    console.log(`[api] app available at http://0.0.0.0:${port}`);
   });
 }
 
